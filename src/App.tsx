@@ -5,6 +5,7 @@ import TechnologySection from './components/TechnologySection';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
+import { ToastContainer } from 'react-toastify';
 
 const dataFetch = async (): Promise<TechnologyType[]> => {
   const res = await fetch('./data.json');
@@ -24,6 +25,7 @@ function App() {
         <TechnologySection promiseData={promiseData} />
       </Suspense>
       <Footer></Footer>
+      <ToastContainer position="top-right" autoClose={2000} theme="light" />
     </>
   );
 }
