@@ -1,18 +1,25 @@
 import { Suspense } from 'react';
 import './App.css';
-import Technology from './components/Technology';
-const dataFetch = async () => {
+import type { Technology as TechnologyType } from './types/technology';
+import TechnologySection from './components/TechnologySection';
+
+const dataFetch = async (): Promise<TechnologyType[]> => {
   const res = await fetch('./data.json');
-  const data = await res.json();
-  return data
+  const data: TechnologyType[] = await res.json();
+
+  return data;
 };
+
 function App() {
-  const promiseData=dataFetch()
-  return <>
-<Suspense fallback={<h2>Loading...........</h2>}>
-  <Technology promiseData={promiseData}></Technology>
-</Suspense>
-  </>;
+  const promiseData: Promise<TechnologyType[]> = dataFetch();
+
+  return (
+    <>
+      <Suspense fallback={<h2>Loading...........</h2>}>
+        <TechnologySection promiseData={promiseData} />
+      </Suspense>
+    </>
+  );
 }
 
 export default App;

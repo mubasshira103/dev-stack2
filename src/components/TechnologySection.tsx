@@ -2,8 +2,13 @@ import React, { use, useState } from 'react';
 import TechnologyCard from './TechnologyCard';
 import type { Technology } from '../types/technology';
 import { toast } from 'react-toastify';
+import StackSidebar from './StackSidebar';
 
-const Technology = ({ promiseData }) => {
+type TechnologyProps = {
+  promiseData: Promise<Technology[]>;
+};
+
+const TechnologySection = ({ promiseData }: TechnologyProps) => {
   // Selected technologies
   const [stack, setStack] = useState<Technology[]>([]);
   const technologies = use(promiseData);
@@ -23,8 +28,36 @@ const Technology = ({ promiseData }) => {
 
     toast.success(`${technology.name} added to your stack!`);
   };
+
+  // Remove One Technology
+  const handleRemove = (id: string): void => {
+    const removedItem = stack.find((item) => item.id === id);
+
+    setStack((previousStack) =>
+      previousStack.filter((item) => item.id !== id)
+    );
+
+    if (removedItem) {
+      toast.info(`${removedItem.name} removed from your stack.`);
+    }
+  };
+
+  // Remove All
+  const handleRemoveAll = (): void => {
+    if (stack.length === 0) {
+      return;
+    }
+
+    setStack([]);
+
+    toast.info('All technologies removed from your stack.');
+  };
+
   return (
-    <div id="technologies" className="mx-auto max-w-7xl px-5 pb-20 pt-10 lg:px-6">
+    <div
+      id="technologies"
+      className="mx-auto max-w-7xl px-5 pb-20 pt-10 lg:px-6"
+    >
       {/* Section Heading */}
       <div className="mb-10">
         <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
@@ -39,10 +72,8 @@ const Technology = ({ promiseData }) => {
         </p>
       </div>
 
-      {/* Loading */}
-
+      {/* Technology Cards */}
       <div className="grid items-start gap-7 lg:grid-cols-[minmax(0,1fr)_280px]">
-        {/* Technology Cards */}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {technologies.map((technology) => (
             <TechnologyCard
@@ -55,14 +86,14 @@ const Technology = ({ promiseData }) => {
         </div>
 
         {/* Stack Sidebar */}
-        {/* <StackSidebar
-              stack={stack}
-              onRemove={handleRemove}
-              onRemoveAll={handleRemoveAll}
-            /> */}
+        <StackSidebar
+          stack={stack}
+          onRemove={handleRemove}
+          onRemoveAll={handleRemoveAll}
+        />
       </div>
     </div>
   );
 };
 
-export default Technology;
+export default TechnologySection;
