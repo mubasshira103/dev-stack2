@@ -1,8 +1,8 @@
-import React, { use, useState } from 'react';
 import TechnologyCard from './TechnologyCard';
 import type { Technology } from '../types/technology';
 import { toast } from 'react-toastify';
 import StackSidebar from './StackSidebar';
+import { use, useState } from 'react';
 
 type TechnologyProps = {
   promiseData: Promise<Technology[]>;
@@ -33,9 +33,7 @@ const TechnologySection = ({ promiseData }: TechnologyProps) => {
   const handleRemove = (id: string): void => {
     const removedItem = stack.find((item) => item.id === id);
 
-    setStack((previousStack) =>
-      previousStack.filter((item) => item.id !== id)
-    );
+    setStack((previousStack) => previousStack.filter((item) => item.id !== id));
 
     if (removedItem) {
       toast.info(`${removedItem.name} removed from your stack.`);
@@ -54,10 +52,7 @@ const TechnologySection = ({ promiseData }: TechnologyProps) => {
   };
 
   return (
-    <div
-      id="technologies"
-      className="mx-auto max-w-7xl px-5 pb-20 pt-10 lg:px-6"
-    >
+    <div id="technologies" className="mx-auto max-w-7xl px-5 pb-20 pt-10 lg:px-6">
       {/* Section Heading */}
       <div className="mb-10">
         <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
@@ -86,11 +81,7 @@ const TechnologySection = ({ promiseData }: TechnologyProps) => {
         </div>
 
         {/* Stack Sidebar */}
-        <StackSidebar
-          stack={stack}
-          onRemove={handleRemove}
-          onRemoveAll={handleRemoveAll}
-        />
+        <StackSidebar stack={stack} onRemove={handleRemove} onRemoveAll={handleRemoveAll} />
       </div>
     </div>
   );

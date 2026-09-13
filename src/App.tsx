@@ -21,7 +21,7 @@ function App() {
     <>
       <Navbar></Navbar>
       <Hero></Hero>
-      <Suspense fallback={<h2>Loading...........</h2>}>
+      <Suspense fallback={<div className='flex justify-center items-center min-h-screen'><span className="loading loading-spinner loading-lg"></span></div>}>
         <TechnologySection promiseData={promiseData} />
       </Suspense>
       <Footer></Footer>

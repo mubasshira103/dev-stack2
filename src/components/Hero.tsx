@@ -1,7 +1,7 @@
 import img from '../assets/banner-stack.png';
 const Hero = () => {
   return (
-    <section id="home" className="overflow-hidden px-5 py-16 sm:py-20 lg:px-6 lg:py-24">
+    <section id="home" className="overflow-hidden px-5 py-14 sm:py-14 lg:px-8 lg:py-14 ">
       <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
         {/* Hero Text */}
         <div className="text-center lg:text-left">

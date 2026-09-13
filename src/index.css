@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@plugin "daisyui";
+
 
 @theme {
   --color-brand-orange: #ff7a18;
