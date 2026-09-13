@@ -1,0 +1,68 @@
+import React, { use, useState } from 'react';
+import TechnologyCard from './TechnologyCard';
+import type { Technology } from '../types/technology';
+import { toast } from 'react-toastify';
+
+const Technology = ({ promiseData }) => {
+  // Selected technologies
+  const [stack, setStack] = useState<Technology[]>([]);
+  const technologies = use(promiseData);
+
+  const handleAddToStack = (technology: Technology): void => {
+    // Check duplicate
+    const alreadyAdded = stack.some((item) => item.id === technology.id);
+
+    if (alreadyAdded) {
+      toast.warning(`${technology.name} is already in your stack!`);
+
+      return;
+    }
+
+    // Add technology
+    setStack((previousStack) => [...previousStack, technology]);
+
+    toast.success(`${technology.name} added to your stack!`);
+  };
+  return (
+    <div id="technologies" className="mx-auto max-w-7xl px-5 pb-20 pt-10 lg:px-6">
+      {/* Section Heading */}
+      <div className="mb-10">
+        <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+          Explore the{' '}
+          <span className="bg-gradient-to-r from-brand-orange via-brand-pink to-brand-violet bg-clip-text text-transparent">
+            Technologies
+          </span>
+        </h2>
+
+        <p className="mt-2 text-sm text-gray-400">
+          Pick one technology per category to build your ideal stack.
+        </p>
+      </div>
+
+      {/* Loading */}
+
+      <div className="grid items-start gap-7 lg:grid-cols-[minmax(0,1fr)_280px]">
+        {/* Technology Cards */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {technologies.map((technology) => (
+            <TechnologyCard
+              key={technology.id}
+              technology={technology}
+              onAdd={handleAddToStack}
+              isAdded={stack.some((item) => item.id === technology.id)}
+            />
+          ))}
+        </div>
+
+        {/* Stack Sidebar */}
+        {/* <StackSidebar
+              stack={stack}
+              onRemove={handleRemove}
+              onRemoveAll={handleRemoveAll}
+            /> */}
+      </div>
+    </div>
+  );
+};
+
+export default Technology;
