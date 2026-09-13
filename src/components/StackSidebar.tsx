@@ -45,7 +45,7 @@ const StackSidebar = ({ stack, onRemove, onRemoveAll }: StackSidebarProps) => {
                 <button
                   onClick={() => onRemove(item.id)}
                   className="ml-auto text-xl leading-none text-gray-300 transition hover:text-red-500"
-                  aria-label={`Remove ${item.name}`}
+                  // aria-label={`Remove ${item.name}`}
                 >
                   ×
                 </button>

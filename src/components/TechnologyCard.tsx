@@ -43,7 +43,7 @@ const TechnologyCard = ({ technology, onAdd, isAdded }: TechnologyCardProps) => 
         disabled={isAdded}
         className={`mt-5 w-full rounded-lg py-3 text-xs font-semibold transition ${
           isAdded
-            ? 'cursor-not-allowed bg-gray-100 text-gray-500'
+            ? 'cursor-not-allowed bg-green-50 text-gray-500'
             : 'bg-slate-950 text-white hover:bg-slate-800'
         }`}
       >
